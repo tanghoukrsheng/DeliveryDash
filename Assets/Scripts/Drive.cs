@@ -1,7 +1,11 @@
 using UnityEngine;
+using UnityEngine.InputSystem;  
 
 public class Drive : MonoBehaviour
 {
+
+    [SerializeField]float steerspeed = 0.2f;
+    [SerializeField]float moveSpeed = 0.1f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -11,8 +15,25 @@ public class Drive : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-         transform.Rotate(0, 0, 0.2f);
+        float steer = 0f;
+        float move =0f;
+        
+         if (Keyboard.current.aKey.isPressed)
+         {
+             steerspeed = 0.25f;
+         }
+         else if (Keyboard.current.dKey.isPressed)
+         {
+             steerspeed = -0.25f;
+         }
+         else
+         {
+             steerspeed = 0f;
+         }
+
+
+         transform.Rotate(0, 0, steerspeed);
+         transform.Translate(0, moveSpeed, 0);
 
     }
 }
