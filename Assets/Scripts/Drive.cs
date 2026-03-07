@@ -5,13 +5,35 @@ public class Drive : MonoBehaviour
 {
 
     [SerializeField] float steerSpeed = 200f;      // degrees per second
-    [SerializeField] float moveSpeed = 10f;
+    [SerializeField] float currentSpeed = 5f;
+    [SerializeField] float boostSpeed = 10f;  // additional speed when boost is active
+    [SerializeField] float regularSpeed = 5f;
+
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         // nothing to initialize yet
     }
+ void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Boost"))
+        {
+            Debug.Log("Boost activated  ");
+            currentSpeed = boostSpeed;
+            Destroy(collision.gameObject);
+        }
+    }
+        
+
+ void OnCollisionEnter2D(Collision2D collision)
+    {
+            currentSpeed = regularSpeed;
+    }
+
+    
 
     // Update is called once per frame
     void Update()
@@ -41,7 +63,7 @@ public class Drive : MonoBehaviour
             steerInput = -1f;
         }
 
-        float moveAmount = moveInput * moveSpeed * Time.deltaTime;
+        float moveAmount = moveInput * currentSpeed * Time.deltaTime;
         float steerAmount = steerInput * steerSpeed * Time.deltaTime;
 
         // move along local Y axis (forward)
