@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;  
+using TMPro;  // for TextMeshProUGUI if needed
 
 public class Drive : MonoBehaviour
 {
@@ -8,14 +9,15 @@ public class Drive : MonoBehaviour
     [SerializeField] float currentSpeed = 5f;
     [SerializeField] float boostSpeed = 10f;  // additional speed when boost is active
     [SerializeField] float regularSpeed = 5f;
-
+    [SerializeField] TMP_Text boostText;  // reference to UI text element to display speed
+   
 
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // nothing to initialize yet
+         // nothing to initialize yet
     }
  void OnTriggerEnter2D(Collider2D collision)
     {
@@ -23,6 +25,7 @@ public class Drive : MonoBehaviour
         {
             Debug.Log("Boost activated  ");
             currentSpeed = boostSpeed;
+            boostText.gameObject.SetActive(true);  // show boost text
             Destroy(collision.gameObject);
         }
     }
@@ -31,6 +34,7 @@ public class Drive : MonoBehaviour
  void OnCollisionEnter2D(Collision2D collision)
     {
             currentSpeed = regularSpeed;
+            boostText.gameObject.SetActive(false);  // hide boost text
     }
 
     
