@@ -10,7 +10,7 @@ public class Drive : MonoBehaviour
     [SerializeField] float boostSpeed = 10f;  // additional speed when boost is active
     [SerializeField] float regularSpeed = 5f;
     
-   
+    [SerializeField] AudioSource sfxBoost; 
 
 
 
@@ -25,6 +25,7 @@ public class Drive : MonoBehaviour
             Debug.Log("Boost activated  ");
             currentSpeed = boostSpeed;
             Destroy(collision.gameObject);
+            sfxBoost.Play();
         }
     }
         

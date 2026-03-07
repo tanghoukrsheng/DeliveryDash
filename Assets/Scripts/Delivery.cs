@@ -9,6 +9,13 @@ public class Delivery : MonoBehaviour
     [SerializeField] TMP_Text timerText;  // reference to UI text element to display speed
     [SerializeField] GameObject victoryScreen;  
     [SerializeField] GameObject defeatScreen;  
+    [SerializeField] AudioSource bgm;  
+
+    [SerializeField] AudioSource sfxBump;  
+    //[SerializeField] AudioSource sfxBoost;  
+    [SerializeField] AudioSource sfxCustomer;  
+
+
     private int currentCount = 0;
     private int maxCount = 3;  
     ParticleSystem particleSystemComponent;
@@ -48,6 +55,7 @@ public class Delivery : MonoBehaviour
             hasPackage = true;
             particleSystemComponent.Play();
             Destroy(collision.gameObject, delayTime);
+            
         }
 
         if(collision.CompareTag("Customer") && hasPackage)
@@ -57,6 +65,7 @@ public class Delivery : MonoBehaviour
             particleSystemComponent.Stop();
             Destroy(collision.gameObject);
             IncreaseCounter();
+                sfxCustomer.Play();
             }
         }
 
