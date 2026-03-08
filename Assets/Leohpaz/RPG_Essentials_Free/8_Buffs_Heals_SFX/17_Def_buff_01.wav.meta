@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b7b5a6156961bac44a67504d42ce6fcf
+guid: 00e4eb96f4f6cc249a632e4027644cad
 AudioImporter:
   externalObjects: {}
   serializedVersion: 6
@@ -25,5 +25,5 @@ AssetOrigin:
   productId: 227708
   packageName: RPG Essentials Sound Effects - FREE!
   packageVersion: 1.0
-  assetPath: Assets/Audio/Leohpaz/RPG_Essentials_Free/10_Battle_SFX/39_Block_03.wav
+  assetPath: Assets/Leohpaz/RPG_Essentials_Free/8_Buffs_Heals_SFX/17_Def_buff_01.wav
   uploadId: 516368
