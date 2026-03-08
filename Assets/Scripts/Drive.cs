@@ -6,9 +6,9 @@ public class Drive : MonoBehaviour
 {
 
     [SerializeField] float steerSpeed = 200f;      // degrees per second
-    [SerializeField] float currentSpeed = 5f;
-    [SerializeField] float boostSpeed = 10f;  // additional speed when boost is active
-    [SerializeField] float regularSpeed = 5f;
+    [SerializeField] float currentSpeed =8f;
+    [SerializeField] float boostSpeed = 4f;  // additional speed when boost is active
+    [SerializeField] float regularSpeed = 8f;
     
     [SerializeField] AudioSource sfxBoost; 
 
@@ -23,7 +23,7 @@ public class Drive : MonoBehaviour
         if(collision.CompareTag("Boost"))
         {
             Debug.Log("Boost activated  ");
-            currentSpeed = boostSpeed;
+            currentSpeed += boostSpeed;
             Destroy(collision.gameObject);
             sfxBoost.Play();
         }
@@ -33,7 +33,6 @@ public class Drive : MonoBehaviour
  void OnCollisionEnter2D(Collision2D collision)
     {
             currentSpeed = regularSpeed;
-    
     }
 
     
@@ -42,7 +41,7 @@ public class Drive : MonoBehaviour
     void Update()
     {
         float steerInput = 0f;   // -1 left, +1 right
-        float moveInput = 0f;
+        float moveInput ;
 
         if (Keyboard.current.wKey.isPressed)
         {
