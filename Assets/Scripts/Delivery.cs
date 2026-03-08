@@ -10,23 +10,27 @@ public class Delivery : MonoBehaviour
     [SerializeField] GameObject victoryScreen;  
     [SerializeField] GameObject defeatScreen;  
     [SerializeField] AudioSource bgm;  
+    [SerializeField] AudioSource VictoryBgm;  
+    [SerializeField] AudioSource DefeatBgm;  
 
-    [SerializeField] AudioSource sfxBump;  
-    //[SerializeField] AudioSource sfxBoost;  
     [SerializeField] AudioSource sfxCustomer;  
+
+    
 
 
     private int currentCount = 0;
-    private int maxCount = 3;  
+    private int maxCount = 4;  
     ParticleSystem particleSystemComponent;
 
-    private int baseTimer = 180;  // 3 minutes in seconds
+    private int baseTimer = 60;  // Base time in seconds for the timer
     private float currentTimer;
+    
     void Start()
     {
     particleSystemComponent = GetComponent<ParticleSystem>();
     currentTimer = baseTimer;
     UpdateCounterDisplay();
+    bgm.Play();
     }
 
     void UpdateCounterDisplay()
@@ -73,6 +77,8 @@ public class Delivery : MonoBehaviour
         {
         Time.timeScale = 0f;  // Pause the game
         victoryScreen.SetActive(true);  // Show victory panel
+        bgm.Stop();
+        VictoryBgm.Play();
         Debug.Log("Victory! All packages delivered!");
         }
 
@@ -89,6 +95,9 @@ public class Delivery : MonoBehaviour
         {
             Time.timeScale = 0f;  // Pause the game
             defeatScreen.SetActive(true);  // Show defeat panel
+             bgm.Stop();
+            DefeatBgm.Play();
+            enabled = false;  // Disable this script to stop Update from running
         }
     }
 }

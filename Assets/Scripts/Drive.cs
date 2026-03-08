@@ -6,24 +6,26 @@ public class Drive : MonoBehaviour
 {
 
     [SerializeField] float steerSpeed = 200f;      // degrees per second
-    [SerializeField] float currentSpeed =8f;
-    [SerializeField] float boostSpeed = 4f;  // additional speed when boost is active
-    [SerializeField] float regularSpeed = 8f;
+    [SerializeField] float currentSpeed = 4f;
+    [SerializeField] float boostSpeed = 2f;  // additional speed when boost is active
+    //[SerializeField] float regularSpeed = 4f;
     
     [SerializeField] AudioSource sfxBoost; 
+    [SerializeField] AudioSource sfxBump; 
 
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    {
+    { 
+        Time.timeScale = 1f;
     }
  void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Boost"))
         {
             Debug.Log("Boost activated  ");
-            currentSpeed += boostSpeed;
+            if(currentSpeed< 16) currentSpeed += boostSpeed; // Increase speed by boost amount, but cap it at 16
             Destroy(collision.gameObject);
             sfxBoost.Play();
         }
@@ -32,7 +34,8 @@ public class Drive : MonoBehaviour
 
  void OnCollisionEnter2D(Collision2D collision)
     {
-            currentSpeed = regularSpeed;
+           Debug.Log("Bump detected"+collision.gameObject.name); // Print the name of the object that triggered the collision
+           sfxBump.Play();
     }
 
     
